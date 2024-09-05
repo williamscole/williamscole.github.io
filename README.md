@@ -1,1 +1,0 @@
-# williamscole.github.io
