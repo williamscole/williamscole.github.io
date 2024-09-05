@@ -50,6 +50,17 @@
             padding: 20px 0;
             background-color: #f4f4f4;
         }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
     </style>
 </head>
 <body>
@@ -59,37 +70,92 @@
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="#overview">Overview</a></li>
-                    <li><a href="#installation">Installation</a></li>
-                    <li><a href="#usage">Usage</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#setup">Setup</a></li>
+                    <li><a href="#map-file">Creating Map File</a></li>
+                    <li><a href="#phasedibd">Running phasedibd</a></li>
+                    <li><a href="#running-ponderosa">Running PONDEROSA</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-
     <div class="container">
         <section id="overview">
-            <h2>Overview</h2>
-            <p>PONDEROSA is a software tool designed to [provide a detailed description of PONDEROSA's purpose and capabilities].</p>
+            <h1>Ponderosa-beta</h1>
         </section>
-
-        <section id="installation">
-            <h2>Installation</h2>
-            <p>[Provide step-by-step installation instructions here]</p>
+        
+        <section id="setup">
+            <h3>Setting up the virtual environment and installing phasedibd</h3>
+            <p><em>I have tested this with Python 3.10.9. Earlier versions of Python may work, but phasedibd needs at least Python 3.8 to install.</em></p>
+            <ol>
+                <li>Create the virtual environment: <code>python -m venv ponderosa_venv</code></li>
+                <li>Activate the virtual environment: <code>source ponderosa_venv/bin/activate</code></li>
+                <li>Install required packages: <code>python -m pip install -r requirements.txt</code> (<code>requirements.txt</code> is found in this directory)</li>
+                <li>Clone <code>phasedibd</code>: <code>git clone https://github.com/23andMe/phasedibd</code></li>
+                <li><code>cd phasedibd</code></li>
+                <li><code>make</code>**</li>
+                <li><code>python setup.py install</code></li>
+                <li><code>python tests/unit_tests.py</code></li>
+            </ol>
+            <p>**On the HPC that I use, I need to replace the third line of the <code>phasedibd</code> Makefile with <code>python -m pip install cython</code> (currently it reads <code>pip install cython --user</code>, which may cause permissions issues).</p>
+            
+            <h3>Setting up a conda environment</h3>
+            <ol>
+                <li><code>conda env create -f environment.yaml</code> will create a conda environment called <code>ponderosa</code> using Python 3.10.9 and will install all necessary dependencies.</li>
+                <li>Activate the virtual environment: <code>conda activate ponderosa</code></li>
+                <li>To set up <code>phasedibd</code>, proceed using steps 4-8 above.</li>
+            </ol>
         </section>
-
-        <section id="usage">
-            <h2>Usage Guide</h2>
-            <p>[Provide detailed usage instructions, including examples and code snippets if applicable]</p>
+        
+        <section id="map-file">
+            <h3>Creating a map file</h3>
+            <p>Running <code>python pedigree_tools.py -interpolate [options]</code> will create a Plink-formatted MAP file with the genetic position filled in. It takes as input a genetic map and interpolates the cM coordinate of a physical position.</p>
+            <p>The following arguments are accepted:</p>
+            <ul>
+                <li><code>-input_map</code>: the MAP file in which the genetic position needs to be filled in (no header; assumes the columns are: chromosome, SNP ID, cM position filled with 0, physical position)</li>
+                <li><code>-genetic_map</code>: the file containing genetic map coordinates (no header; requires the following columns: chromosome, cM position, physical position)</li>
+                <li><code>-columns</code>: default is to assume that <code>genetic_map</code> is a Plink MAP-formatted file. Alternatively, you can use this optional argument to specify the 0-indexed index of the chromosome, cM position, and physical position columns (in that order). E.g., <code>-columns 2 3 4</code> indicates that the chromosome, cM, and Mb columns are the 3rd, 4th, and 5th columns, respectively.</li>
+                <li><code>-sites</code>: if only a subset of loci are to be output. This file has no headers and expects two columns: chromosome and physical position. This is <strong>optional</strong> and omitting it will include all sites in <code>input_map</code>.</li>
+            </ul>
+            <p>The output is the file: <code>[input_map]_interpolated.map</code></p>
         </section>
-
-        <section id="faq">
-            <h2>Frequently Asked Questions</h2>
-            <p>[List common questions and answers about PONDEROSA]</p>
+        
+        <section id="phasedibd">
+            <h3>Running phasedibd</h3>
+            <p>Running <code>python pedigree_tools.py -phasedibd [options]</code> will run <code>phasedibd</code>.</p>
+            <p>The following arguments are accepted:</p>
+            <ul>
+                <li><code>-input_vcf</code>: uncompressed VCF for a single chromosome.</li>
+                <li><code>-input_map</code>: Plink MAP file. <code>phasedibd</code> requires that it contains <em>exactly</em> the sites in <code>input_vcf</code>; see above <code>-interpolate</code> to create this file.</li>
+                <li><code>-outfile</code>: the name of the file to write the IBD segments to.</li>
+            </ul>
+        </section>
+        
+        <section id="running-ponderosa">
+            <h3>Running PONDEROSA</h3>
+            <h4>Required file arguments</h4>
+            <ul>
+                <li><code>--ibd</code>: phasedibd IBD output file. If all chromosomes are in the same file, simply provide the file name. Otherwise, provide the file name for chromosome 1 (assumes that "chr1" is in the file name).</li>
+                <li><code>--fam</code>: PLINK-formatted FAM file.</li>
+                <li><code>--king</code>: KING .seg file.</li>
+            </ul>
+            <h4>Optional file arguments</h4>
+            <ul>
+                <li><code>--ages</code>: Age file where the first column is the individual ID and the second column is the age.</li>
+                <li><code>--map</code>: PLINK-formatted MAP file (<em>highly recommended</em>). Sites from all chromosomes can be in the same file; otherwise provide the file for chromosome 1.</li>
+                <li><code>--populations</code>: For running Ponderosa on a subset of samples, this file contains individual IDs (column 1) and a population label (column 2); you may specify which population you'd like run with <code>--population</code>.</li>
+                <li><code>--yaml</code>: You may provide all of these arguments in a YAML file instead of on the command-line interface.</li>
+                <li><code>--pedigree_codes</code>: Instructs PONDEROSA which relationships to look for in the dataset.</li>
+            </ul>
+            <h4>Other arguments</h4>
+            <ul>
+                <li><code>--output</code>: Output file prefix. <em>Default: Ponderosa</em></li>
+                <li><code>--min_p</code>: Minimum probability required for the relationship output. E.g., if P(2nd)=0.98 and P(MHS)=0.93, setting <code>min_p=0.95</code> would report the pair as <code>2nd</code>, but <code>min_p=0.9</code> would report the pair as <code>MHS</code>. <em>Default 0.50</em></li>
+                <li><code>--population</code>: Used with <code>--populations</code>, specifies the population to run PONDEROSA on.</li>
+                <li><code>--assess</code>: For assessing the performance of Ponderosa on the known pairs.</li>
+                <li><code>--training</code>: Full path and file name to the degree classifier. Assumes that the the haplotype score classifier (hap) and number of IBD segments classifier (nsegs) have the same prefix/suffix.</li>
+            </ul>
         </section>
     </div>
-
     <footer>
         <p>&copy; 2024 Cole Williams | <a href="index.html">Back to Home</a></p>
     </footer>
