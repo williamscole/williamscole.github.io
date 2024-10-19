@@ -39,11 +39,14 @@
     <h1>PONDEROSA Pedigree Simulator</h1>
     
     <h2>Overview</h2>
-    <p>The PONDEROSA Pedigree Simulator is a tool designed to generate synthetic pedigrees and genetic data for testing and demonstrating the capabilities of PONDEROSA. It allows users to create complex family structures with specified relationships and simulate genetic inheritance patterns.</p>
+    <p>The PONDEROSA Pedigree Simulator is a tool designed to generate training data for PONDEROSA.</p>
 
     <h2>Installation</h2>
-    <p>To install the PONDEROSA Pedigree Simulator:</p>
-    <pre><code>pip install ponderosa-simulator</code></pre>
+    <p>The PONDEROSA Pedigree Simulator uses a modified version of Ped-Sim, that gives the Simulator pipeline more control over the input founder individuals.</p>
+    <pre><code>git clone https://github.com/williamscole/ped-sim.git
+cd ped-sim
+make
+./setup.sh</code></pre>
     <p>Ensure you have Python 3.8 or later installed on your system.</p>
 
     <h2>Usage</h2>
