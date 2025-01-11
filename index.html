@@ -18,6 +18,9 @@
             max-width: 800px;
             margin: 0 auto;
         }
+        nav {
+            margin-bottom: 40px;
+        }
         .section {
             margin-bottom: 40px;
         }
@@ -43,6 +46,25 @@
         .software-content {
             flex: 1;
         }
+        .contact-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #333;
+        }
+        .contact-link:hover {
+            color: #0366d6;  /* GitHub blue color */
+        }
+        .icon {
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body>
@@ -51,6 +73,7 @@
         <nav>
             <a href="#about">About</a> |
             <a href="#software">Software</a> |
+            <a href="#publications">Publications</a> |
             <a href="#contact">Contact</a>
         </nav>
     </div>
@@ -62,6 +85,18 @@
                 <h2>About Me</h2>
                 <p>I'm Cole Williams, a fifth year PhD candidate in Dr. Sohini Ramachandran's group at Brown University.</p>
                 <p>I am supported by an NSF Graduate Research Fellowship.</p>
+                <a href="https://scholar.google.com/citations?user=7HNgescAAAAJ&hl=en" class="contact-link" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm0-2L4.938 8.265A11.947 11.947 0 0112 3.945a11.947 11.947 0 017.062 4.32L12 12zm0 0l7.062-3.735A11.947 11.947 0 0012 3.945a11.947 11.947 0 00-7.062 4.32L12 12zm0 0L4.938 8.265A11.947 11.947 0 0012 3.945a11.947 11.947 0 017.062 4.32L12 12z"/>
+                    </svg>
+                    Google Scholar
+                </a>
+                <a href="https://github.com/williamscole" class="contact-link" target="_blank" rel="noopener noreferrer">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                    GitHub
+                </a>
             </div>
         </div>
 
@@ -72,13 +107,116 @@
                 <div class="software-content">
                     <h3>PONDEROSA</h3>
                     <p>PONDEROSA is a tool for genealogical relationship inference through identity-by-descent segments.</p>
+                    <a href="https://github.com/williamscole/PonderosaBeta" class="github-link" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="software-item">
+                <img src="haptic.png" alt="HAPTIC Logo" class="software-logo">
+                <div class="software-content">
+                    <h3>HAPTIC</h3>
+                    <p>HAPTIC is a tool for inter-chromosomal haplotype phasing.</p>
+                    <a href="https://github.com/williamscole/HAPTIC" class="github-link" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        View on GitHub
+                    </a>
                 </div>
             </div>
         </div>
 
+        <style>
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: #333;
+            padding: 6px 12px;
+            border-radius: 5px;
+            margin-top: 1px;
+            transition: all 0.2s ease;
+            font-size: 0.9em;
+        }
+
+        .github-link:hover {
+            background-color: #f6f8fa;
+            color: #0366d6;
+        }
+
+        .icon {
+            transition: transform 0.2s ease;
+        }
+
+        .github-link:hover .icon {
+            transform: scale(1.1);
+        }
+        </style>
+
+        <div id="publications" class="section">
+            <h2>Publications</h2>
+            <div class="publications-list">
+                <div class="publication">
+                    <p><b>CM Williams</b>, J O'Connell, WA Freyman, 23andMe Research Team, CR Gignoux, S Ramachandran, AL Williams. (2024). "Phasing millions of samples achieves near perfect accuracy, enabling parent-of-origin classification of variants." <em>bioRxiv</em>, 2024.05.06.592816.</p>
+                </div>
+
+                <div class="publication">
+                    <p><b>CM Williams</b>, BA Scelza, SD Slack, RA Mathias, H Watson, KC Barnes...S Ramachandran, BM Henn. (2024). "A rapid, accurate approach to inferring pedigrees in endogamous populations." <em>bioRxiv</em>, 2020.02.25.965376.</p>
+                </div>
+
+                <div class="publication">
+                    <p>NA Swinford, SP Prall, S Gopalan, <b>CM Williams</b>, J Sheehama, BA Scelza. (2023). "Increased homozygosity due to endogamy results in fitness consequences in a human population." <em>Proceedings of the National Academy of Sciences</em>, 120(43), e2309552120.</p>
+                </div>
+
+                <div class="publication">
+                    <p>LK Wiley, JA Shortt, ER Roberts, J Lowery, E Kudron, M Lin, D Mayer...<b>CM Williams</b> et al. (2022). "Building a vertically integrated genomic learning health system: The biobank at the Colorado Center for Personalized Medicine." <em>The American Journal of Human Genetics</em>, 111(1), 11-23.</p>
+                </div>
+
+                <div class="publication">
+                    <p>S Gopalan, REW Berl, JW Myrick, ZH Garfield, AW Reynolds, BK Bafens...<b>CM Williams</b> et al. (2022). "Hunter-gatherer genomes reveal diverse demographic trajectories during the rise of farming in Eastern Africa." <em>Current Biology</em>, 32(8), 1852-1860.e5.</p>
+                </div>
+            </div>
+        </div>
+
+        <style>
+        .publications-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        }
+
+        .publication {
+        padding: 10px 0;
+        }
+
+        .publication p {
+        margin: 0;
+        line-height: 1.6;
+        }
+
+        .publication em {
+        font-style: italic;
+        }
+        </style>
+
+
         <div id="contact" class="section">
             <h2>Contact</h2>
-            <p>Email: <a href="mailto:cole_williams@brown.edu">cole_williams@brown.edu</a></p>
+            <div class="contact-links">
+                <a href="mailto:cole_williams@brown.edu" class="contact-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    cole_williams@brown.edu
+                </a>
+            </div>
         </div>
     </div>
 
