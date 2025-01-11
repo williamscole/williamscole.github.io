@@ -272,13 +272,16 @@
                 <p>An interactive tutorial exploring PCA to visual genetic variation.</p>
                 <div class="gif-container">
                     <img src="pca.gif" alt="PCA" class="demo-gif">
+                    <div class="gif-caption">
+                        Separation of 1000 Genomes samples on PC1 (y-axis) as the number of markers considered (x-axis) increases.
+                    </div>
                 </div>
                 <div class="resource-links">
                     <a href="https://colab.research.google.com/drive/1-QuJZ-KENsxprN6wTsbUbxBti1vrN4Wr?usp=sharing" class="resource-link colab-link" target="_blank" rel="noopener noreferrer">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                         </svg>
-                        Google Colab
+                        Try it yourself on Google colab!
                     </a>
                 </div>
             </div>
@@ -353,6 +356,16 @@
             width: 100%;
             height: auto;
             display: block;
+        }
+        
+        .gif-caption {
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
         }
         </style>
 
