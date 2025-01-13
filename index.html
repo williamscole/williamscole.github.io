@@ -9,69 +9,29 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
         }
+
         .container {
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
-        nav {
-            margin-bottom: 40px;
-        }
+
         .section {
             margin-bottom: 40px;
         }
+
+        /* About section styles */
         .about-section {
             display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .headshot {
-            width: 250px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        .software-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-        }
-        .software-logo {
-            width: 100px;
-            margin-right: 20px;
-        }
-        .software-content {
-            flex: 1;
-        }
-        .contact-links {
-            display: flex;
-            gap: 20px;
+            flex-direction: column;
             align-items: center;
-        }
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: #333;
-        }
-        .contact-link:hover {
-            color: #0366d6;  /* GitHub blue color */
-        }
-        .icon {
-            width: 24px;
-            height: 24px;
-        }
-        .about-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    padding: 20px;
+            gap: 20px;
+            padding: 20px;
         }
 
         .headshot {
@@ -83,7 +43,6 @@
 
         .about-content {
             text-align: center;
-            max-width: 100%;
         }
 
         .profile-links {
@@ -94,12 +53,49 @@
             margin-top: 20px;
         }
 
-        /* Desktop styles - will apply when screen is wider than 768px */
+        /* Software section styles */
+        .software-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .software-logo {
+            width: 100px;
+            margin-bottom: 15px;
+        }
+
+        .software-content {
+            width: 100%;
+        }
+
+        /* Links and icons */
+        .contact-link, .github-link, .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #333;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.2s ease;
+        }
+
+        /* Desktop styles */
         @media (min-width: 768px) {
-            .about-container {
+            .about-section {
                 flex-direction: row;
                 align-items: flex-start;
                 text-align: left;
+                padding: 40px 0;
             }
 
             .headshot {
@@ -109,13 +105,75 @@
 
             .about-content {
                 text-align: left;
-                padding-left: 20px;
+                padding-left: 40px;
             }
 
             .profile-links {
                 flex-direction: row;
                 justify-content: flex-start;
             }
+
+            .software-item {
+                flex-direction: row;
+                text-align: left;
+                gap: 20px;
+            }
+
+            .software-logo {
+                margin-bottom: 0;
+            }
+
+            .software-content {
+                flex: 1;
+            }
+        }
+
+        /* Additional styles preserved from original */
+        .publications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .publication {
+            padding: 10px 0;
+        }
+
+        .gif-container {
+            margin: 15px 0;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .demo-gif {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gif-caption {
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+            padding: 8px;
+            background-color: #f8f9fa;
+        }
+
+        nav {
+            margin: 20px 0 40px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 10px;
+        }
+
+        nav a:first-child {
+            margin-left: 0;
         }
     </style>
 </head>
