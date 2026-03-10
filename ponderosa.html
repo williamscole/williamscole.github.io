@@ -3,161 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PONDEROSA Documentation - Cole Williams</title>
+    <title>PONDEROSA Documentation — Cole Williams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --ink: #1a1a2e;
+            --muted: #6b7280;
+            --accent: #2d6a4f;
+            --accent-light: #d8f3dc;
+            --bg: #fafaf8;
+            --border: #e5e7eb;
+            --serif: 'Lora', Georgia, serif;
+            --sans: 'DM Sans', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-            color: #333;
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--ink);
+            font-size: 16px;
+            line-height: 1.7;
         }
-        .container {
-            width: 80%;
-            max-width: 800px;
+
+        .page {
+            max-width: 760px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 24px;
         }
+
         header {
-            background-color: #f4f4f4;
-            padding: 20px 0;
-            text-align: center;
+            padding: 36px 0 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 52px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
         }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-        nav ul li a {
+
+        .site-name {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink);
             text-decoration: none;
-            color: #333;
         }
-        h1, h2, h3 {
-            color: #2c3e50;
+
+        nav { display: flex; gap: 24px; flex-wrap: wrap; }
+        nav a {
+            font-size: 0.875rem;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
         }
+        nav a:hover { color: var(--ink); }
+
+        .page-title {
+            font-family: var(--serif);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .page-subtitle {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 48px;
+        }
+
+        .toc {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 48px;
+        }
+
+        .toc h3 {
+            font-family: var(--serif);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 12px;
+        }
+
+        .toc ol {
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .toc a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: opacity 0.2s;
+        }
+        .toc a:hover { opacity: 0.7; }
+
         section {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(12px);
+            animation: fadeUp 0.4s ease forwards;
         }
-        a {
-            color: #3498db;
+
+        section:nth-child(1) { animation-delay: 0.05s; }
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.15s; }
+        section:nth-child(4) { animation-delay: 0.2s; }
+        section:nth-child(5) { animation-delay: 0.25s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
         }
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            background-color: #f4f4f4;
+
+        h2 {
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: -0.02em;
         }
+
+        h3 {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-top: 28px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 0.925rem;
+            color: #374151;
+            margin-bottom: 14px;
+        }
+
+        em { color: var(--muted); }
+
+        ul, ol {
+            padding-left: 22px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            font-size: 0.925rem;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
         code {
-            background-color: #f4f4f4;
-            padding: 2px 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.83rem;
+            background: #f1f1ee;
+            padding: 2px 6px;
             border-radius: 4px;
+            color: var(--accent);
+            border: 1px solid #e2e2de;
         }
+
         pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 4px;
+            background: #f1f1ee;
+            border: 1px solid #e2e2de;
+            border-radius: 8px;
+            padding: 16px 18px;
             overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--ink);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .note {
+            background: var(--accent-light);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            padding: 12px 16px;
+            margin: 16px 0;
+            font-size: 0.875rem;
+            color: #1a3c2a;
+        }
+
+        .arg-block {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+
+        .arg-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .arg-row:last-child { border-bottom: none; }
+
+        .arg-name {
+            padding: 10px 14px;
+            background: #f9f9f7;
+            border-right: 1px solid var(--border);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .arg-desc {
+            padding: 10px 14px;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 0 40px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 560px) {
+            .arg-row { grid-template-columns: 1fr; }
+            .arg-name { border-right: none; border-bottom: 1px solid var(--border); }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>PONDEROSA</h1>
+    <div class="page">
+        <header>
+            <a href="index.html" class="site-name">Cole Williams</a>
             <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#setup">Setup</a></li>
-                    <li><a href="#map-file">Creating Map File</a></li>
-                    <li><a href="#phasedibd">Running phasedibd</a></li>
-                    <li><a href="#running-ponderosa">Running PONDEROSA</a></li>
-                </ul>
+                <a href="index.html#about">About</a>
+                <a href="index.html#software">Software</a>
+                <a href="index.html#publications">Publications</a>
+                <a href="index.html#contact">Contact</a>
             </nav>
+        </header>
+
+        <div class="page-title">PONDEROSA</div>
+        <p class="page-subtitle">Documentation for PONDEROSA-beta — genealogical relationship inference via identity-by-descent.</p>
+
+        <div class="toc">
+            <h3>Contents</h3>
+            <ol>
+                <li><a href="#setup">Environment Setup</a></li>
+                <li><a href="#map-file">Creating a Map File</a></li>
+                <li><a href="#phasedibd">Running phasedibd</a></li>
+                <li><a href="#running-ponderosa">Running PONDEROSA</a></li>
+            </ol>
         </div>
-    </header>
-    <div class="container">
-        <section id="overview">
-            <h1>Ponderosa-beta</h1>
-        </section>
-        
+
         <section id="setup">
-            <h3>Setting up the virtual environment and installing phasedibd</h3>
-            <p><em>I have tested this with Python 3.10.9. Earlier versions of Python may work, but phasedibd needs at least Python 3.8 to install.</em></p>
-            <ol>
-                <li>Create the virtual environment: <code>python -m venv ponderosa_venv</code></li>
-                <li>Activate the virtual environment: <code>source ponderosa_venv/bin/activate</code></li>
-                <li>Install required packages: <code>python -m pip install -r requirements.txt</code> (<code>requirements.txt</code> is found in this directory)</li>
-                <li>Clone <code>phasedibd</code>: <code>git clone https://github.com/23andMe/phasedibd</code></li>
-                <li><code>cd phasedibd</code></li>
-                <li><code>make</code>**</li>
-                <li><code>python setup.py install</code></li>
-                <li><code>python tests/unit_tests.py</code></li>
-            </ol>
-            <p>**On the HPC that I use, I need to replace the third line of the <code>phasedibd</code> Makefile with <code>python -m pip install cython</code> (currently it reads <code>pip install cython --user</code>, which may cause permissions issues).</p>
-            
-            <h3>Setting up a conda environment</h3>
-            <ol>
-                <li><code>conda env create -f environment.yaml</code> will create a conda environment called <code>ponderosa</code> using Python 3.10.9 and will install all necessary dependencies.</li>
-                <li>Activate the virtual environment: <code>conda activate ponderosa</code></li>
-                <li>To set up <code>phasedibd</code>, proceed using steps 4-8 above.</li>
-            </ol>
+            <h2>1. Environment Setup</h2>
+
+            <h3>Virtual environment</h3>
+            <p><em>Tested with Python 3.10.9. Python 3.8+ required for phasedibd.</em></p>
+            <pre><code>python -m venv ponderosa_venv
+source ponderosa_venv/bin/activate
+python -m pip install -r requirements.txt
+git clone https://github.com/23andMe/phasedibd
+cd phasedibd
+make
+python setup.py install
+python tests/unit_tests.py</code></pre>
+            <div class="note">
+                On some HPCs, replace line 3 of the phasedibd Makefile (<code>pip install cython --user</code>) with <code>python -m pip install cython</code> to avoid permissions issues.
+            </div>
+
+            <h3>Conda environment</h3>
+            <pre><code>conda env create -f environment.yaml
+conda activate ponderosa</code></pre>
+            <p>Then proceed with steps 4–8 above to install <code>phasedibd</code>.</p>
         </section>
-        
+
         <section id="map-file">
-            <h3>Creating a map file</h3>
-            <p>Running <code>python pedigree_tools.py -interpolate [options]</code> will create a Plink-formatted MAP file with the genetic position filled in. It takes as input a genetic map and interpolates the cM coordinate of a physical position.</p>
-            <p>The following arguments are accepted:</p>
-            <ul>
-                <li><code>-input_map</code>: the MAP file in which the genetic position needs to be filled in (no header; assumes the columns are: chromosome, SNP ID, cM position filled with 0, physical position)</li>
-                <li><code>-genetic_map</code>: the file containing genetic map coordinates (no header; requires the following columns: chromosome, cM position, physical position)</li>
-                <li><code>-columns</code>: default is to assume that <code>genetic_map</code> is a Plink MAP-formatted file. Alternatively, you can use this optional argument to specify the 0-indexed index of the chromosome, cM position, and physical position columns (in that order). E.g., <code>-columns 2 3 4</code> indicates that the chromosome, cM, and Mb columns are the 3rd, 4th, and 5th columns, respectively.</li>
-                <li><code>-sites</code>: if only a subset of loci are to be output. This file has no headers and expects two columns: chromosome and physical position. This is <strong>optional</strong> and omitting it will include all sites in <code>input_map</code>.</li>
-            </ul>
-            <p>The output is the file: <code>[input_map]_interpolated.map</code></p>
+            <h2>2. Creating a Map File</h2>
+            <p>Run <code>python pedigree_tools.py -interpolate [options]</code> to create a Plink-formatted MAP file with genetic positions filled in via interpolation from a reference genetic map.</p>
+
+            <div class="arg-block">
+                <div class="arg-row">
+                    <div class="arg-name">-input_map</div>
+                    <div class="arg-desc">MAP file to fill in. No header. Columns: chromosome, SNP ID, cM position (set to 0), physical position.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">-genetic_map</div>
+                    <div class="arg-desc">Reference genetic map. No header. Requires columns: chromosome, cM position, physical position.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">-columns</div>
+                    <div class="arg-desc">Optional. 0-indexed column positions for chromosome, cM, and physical position. E.g., <code>-columns 2 3 4</code>. Default assumes Plink MAP format.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">-sites</div>
+                    <div class="arg-desc">Optional. Subset of loci to output. Two columns (no header): chromosome, physical position. If omitted, all sites in <code>input_map</code> are included.</div>
+                </div>
+            </div>
+
+            <p>Output: <code>[input_map]_interpolated.map</code></p>
         </section>
-        
+
         <section id="phasedibd">
-            <h3>Running phasedibd</h3>
-            <p>Running <code>python pedigree_tools.py -phasedibd [options]</code> will run <code>phasedibd</code>.</p>
-            <p>The following arguments are accepted:</p>
-            <ul>
-                <li><code>-input_vcf</code>: uncompressed VCF for a single chromosome.</li>
-                <li><code>-input_map</code>: Plink MAP file. <code>phasedibd</code> requires that it contains <em>exactly</em> the sites in <code>input_vcf</code>; see above <code>-interpolate</code> to create this file.</li>
-                <li><code>-outfile</code>: the name of the file to write the IBD segments to.</li>
-            </ul>
+            <h2>3. Running phasedibd</h2>
+            <p>Run <code>python pedigree_tools.py -phasedibd [options]</code> to detect IBD segments.</p>
+
+            <div class="arg-block">
+                <div class="arg-row">
+                    <div class="arg-name">-input_vcf</div>
+                    <div class="arg-desc">Uncompressed VCF for a single chromosome.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">-input_map</div>
+                    <div class="arg-desc">Plink MAP file. Must contain <em>exactly</em> the sites in <code>input_vcf</code>. Use <code>-interpolate</code> above to create this file.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">-outfile</div>
+                    <div class="arg-desc">Output file name for IBD segments.</div>
+                </div>
+            </div>
         </section>
-        
+
         <section id="running-ponderosa">
-            <h3>Running PONDEROSA</h3>
-            <h4>Required file arguments</h4>
-            <ul>
-                <li><code>--ibd</code>: phasedibd IBD output file. If all chromosomes are in the same file, simply provide the file name. Otherwise, provide the file name for chromosome 1 (assumes that "chr1" is in the file name).</li>
-                <li><code>--fam</code>: PLINK-formatted FAM file.</li>
-                <li><code>--king</code>: KING .seg file.</li>
-            </ul>
-            <h4>Optional file arguments</h4>
-            <ul>
-                <li><code>--ages</code>: Age file where the first column is the individual ID and the second column is the age.</li>
-                <li><code>--map</code>: PLINK-formatted MAP file (<em>highly recommended</em>). Sites from all chromosomes can be in the same file; otherwise provide the file for chromosome 1.</li>
-                <li><code>--populations</code>: For running Ponderosa on a subset of samples, this file contains individual IDs (column 1) and a population label (column 2); you may specify which population you'd like run with <code>--population</code>.</li>
-                <li><code>--yaml</code>: You may provide all of these arguments in a YAML file instead of on the command-line interface.</li>
-                <li><code>--pedigree_codes</code>: Instructs PONDEROSA which relationships to look for in the dataset.</li>
-            </ul>
-            <h4>Other arguments</h4>
-            <ul>
-                <li><code>--output</code>: Output file prefix. <em>Default: Ponderosa</em></li>
-                <li><code>--min_p</code>: Minimum probability required for the relationship output. E.g., if P(2nd)=0.98 and P(MHS)=0.93, setting <code>min_p=0.95</code> would report the pair as <code>2nd</code>, but <code>min_p=0.9</code> would report the pair as <code>MHS</code>. <em>Default 0.50</em></li>
-                <li><code>--population</code>: Used with <code>--populations</code>, specifies the population to run PONDEROSA on.</li>
-                <li><code>--assess</code>: For assessing the performance of Ponderosa on the known pairs.</li>
-                <li><code>--training</code>: Full path and file name to the degree classifier. Assumes that the the haplotype score classifier (hap) and number of IBD segments classifier (nsegs) have the same prefix/suffix.</li>
-            </ul>
+            <h2>4. Running PONDEROSA</h2>
+
+            <h3>Required file arguments</h3>
+            <div class="arg-block">
+                <div class="arg-row">
+                    <div class="arg-name">--ibd</div>
+                    <div class="arg-desc">phasedibd IBD output. If all chromosomes are in one file, provide the file name. Otherwise provide chromosome 1 file (assumes "chr1" in the filename).</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--fam</div>
+                    <div class="arg-desc">PLINK-formatted FAM file.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--king</div>
+                    <div class="arg-desc">KING <code>.seg</code> file.</div>
+                </div>
+            </div>
+
+            <h3>Optional file arguments</h3>
+            <div class="arg-block">
+                <div class="arg-row">
+                    <div class="arg-name">--ages</div>
+                    <div class="arg-desc">Age file. Column 1: individual ID, column 2: age.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--map</div>
+                    <div class="arg-desc"><em>Highly recommended.</em> PLINK-formatted MAP file. All chromosomes can be in one file, or provide chromosome 1.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--populations</div>
+                    <div class="arg-desc">For running on a subset of samples. Column 1: individual ID, column 2: population label. Specify target population with <code>--population</code>.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--yaml</div>
+                    <div class="arg-desc">Provide all arguments via YAML file instead of the command line.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--pedigree_codes</div>
+                    <div class="arg-desc">Instructs PONDEROSA which relationship types to look for.</div>
+                </div>
+            </div>
+
+            <h3>Other arguments</h3>
+            <div class="arg-block">
+                <div class="arg-row">
+                    <div class="arg-name">--output</div>
+                    <div class="arg-desc">Output file prefix. Default: <code>Ponderosa</code>.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--min_p</div>
+                    <div class="arg-desc">Minimum probability for relationship output. E.g., with <code>min_p=0.95</code>, a pair with P(2nd)=0.98 and P(MHS)=0.93 is reported as <code>2nd</code>. Default: <code>0.50</code>.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--population</div>
+                    <div class="arg-desc">Used with <code>--populations</code>; specifies which population to run.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--assess</div>
+                    <div class="arg-desc">Assess performance on known pairs.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--training</div>
+                    <div class="arg-desc">Full path to the degree classifier. Assumes haplotype score (hap) and number of IBD segments (nsegs) classifiers share the same prefix/suffix.</div>
+                </div>
+            </div>
         </section>
+
+        <footer>
+            <p>&copy; 2025 Cole Williams &mdash; <a href="index.html">Back to home</a></p>
+        </footer>
     </div>
-    <footer>
-        <p>&copy; 2024 Cole Williams | <a href="index.html">Back to Home</a></p>
-    </footer>
 </body>
 </html>

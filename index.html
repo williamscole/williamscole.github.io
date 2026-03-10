@@ -4,347 +4,506 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cole Williams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        :root {
+            --ink: #1a1a2e;
+            --muted: #6b7280;
+            --accent: #2d6a4f;
+            --accent-light: #d8f3dc;
+            --bg: #fafaf8;
+            --border: #e5e7eb;
+            --serif: 'Lora', Georgia, serif;
+            --sans: 'DM Sans', sans-serif;
         }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--ink);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* Layout */
+        .page {
+            max-width: 760px;
             margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header / Nav */
+        header {
+            padding: 36px 0 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 60px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .site-name {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            text-decoration: none;
         }
 
         nav {
-            margin-bottom: 40px;
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
         }
 
         nav a {
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: var(--muted);
             text-decoration: none;
-            color: #333;
-            margin: 0 10px;
+            letter-spacing: 0.02em;
+            transition: color 0.2s;
         }
 
-        nav a:hover {
-            color: #0366d6;
+        nav a:hover { color: var(--ink); }
+
+        /* Sections */
+        section {
+            margin-bottom: 72px;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp 0.5s ease forwards;
         }
 
-        .section {
-            margin-bottom: 40px;
+        section:nth-child(1) { animation-delay: 0.05s; }
+        section:nth-child(2) { animation-delay: 0.15s; }
+        section:nth-child(3) { animation-delay: 0.25s; }
+        section:nth-child(4) { animation-delay: 0.35s; }
+        section:nth-child(5) { animation-delay: 0.45s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* About section styles */
-        .about-section {
-            display: flex;
+        h2 {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 28px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: -0.02em;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 160px 1fr;
             gap: 40px;
-            align-items: flex-start;
-            margin-bottom: 40px;
+            align-items: start;
         }
 
         .headshot {
-            width: 250px;
-            height: 250px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             object-fit: cover;
-            flex-shrink: 0;
+            border: 3px solid var(--border);
         }
 
-        .about-content {
-            flex: 1;
+        .headshot-placeholder {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            border: 3px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 2.5rem;
+            font-family: var(--serif);
+            font-weight: 600;
+        }
+
+        .about-text p {
+            color: #374151;
+            margin-bottom: 12px;
+            font-size: 0.975rem;
+        }
+
+        .position-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            letter-spacing: 0.01em;
         }
 
         .profile-links {
             display: flex;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-top: 20px;
         }
 
-        /* Software section styles */
-        .software-item {
+        .profile-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.825rem;
+            font-weight: 500;
+            color: var(--muted);
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .profile-link:hover {
+            color: var(--ink);
+            border-color: var(--ink);
+            background: white;
+        }
+
+        .profile-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+        /* Software */
+        .software-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .software-card {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 30px;
             gap: 20px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .software-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+            border-color: #d1d5db;
         }
 
         .software-logo {
-            width: 100px;
+            width: 72px;
             flex-shrink: 0;
+            border-radius: 6px;
         }
 
-        .software-content {
-            flex: 1;
+        .software-card h3 {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--ink);
         }
 
-        /* Publications styles */
-        .publications-list {
+        .software-card p {
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: var(--accent-light);
+            color: var(--accent);
+            letter-spacing: 0.02em;
+        }
+
+        /* Publications */
+        .pub-list {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 0;
         }
 
-        .publication {
-            padding: 10px 0;
+        .pub {
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: #374151;
+            line-height: 1.65;
         }
 
-        .publication p {
-            margin: 0;
-            line-height: 1.6;
+        .pub:last-child { border-bottom: none; }
+
+        .pub .authors { color: var(--muted); }
+        .pub .my-name { color: var(--ink); font-weight: 500; }
+        .pub .title { color: var(--ink); }
+        .pub .venue { font-style: italic; }
+
+        .pub-status {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 1px 7px;
+            border-radius: 3px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: var(--accent-light);
+            color: var(--accent);
+            margin-left: 6px;
+            vertical-align: middle;
         }
 
-        /* Link styles */
-        .contact-link, .github-link, .resource-link {
+        /* Unpublished */
+        .unp-card {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            margin-bottom: 20px;
+        }
+
+        .unp-card h3 {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .unp-card p {
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .gif-wrap {
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin: 12px 0;
+            max-width: 500px;
+        }
+
+        .gif-wrap img { width: 100%; display: block; }
+        .gif-caption {
+            font-size: 0.78rem;
+            color: var(--muted);
+            padding: 8px 10px;
+            background: #f9f9f7;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Contact */
+        .contact-link {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            font-size: 0.9rem;
+            color: var(--ink);
             text-decoration: none;
-            color: #333;
-            padding: 6px 12px;
-            border-radius: 5px;
-            transition: all 0.2s ease;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2px;
+            transition: border-color 0.2s, color 0.2s;
         }
 
-        .contact-link:hover, .github-link:hover {
-            color: #0366d6;
-            background-color: #f6f8fa;
+        .contact-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
-        .colab-link:hover {
-            color: #F9AB00;
+        .contact-link svg { width: 16px; height: 16px; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 0 40px;
+            font-size: 0.8rem;
+            color: var(--muted);
         }
 
-        .icon {
-            width: 24px;
-            height: 24px;
-            transition: transform 0.2s ease;
-        }
-
-        .contact-link:hover .icon, 
-        .github-link:hover .icon {
-            transform: scale(1.1);
-        }
-
-        /* GIF container styles */
-        .gif-container {
-            margin: 15px 0;
-            width: 100%;
-            max-width: 600px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .demo-gif {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .gif-caption {
-            font-size: 0.9em;
-            color: #666;
-            text-align: center;
-            padding: 8px;
-            background-color: #f8f9fa;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
-
-        /* Mobile styles */
-        @media (max-width: 768px) {
-            .about-section {
-                flex-direction: column;
-                align-items: center;
+        /* Responsive */
+        @media (max-width: 560px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                justify-items: center;
                 text-align: center;
             }
-
-            .headshot {
-                width: 200px;
-                height: 200px;
-            }
-
-            .profile-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .software-item {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .software-logo {
-                margin-bottom: 15px;
-            }
+            .profile-links { justify-content: center; }
+            .software-card { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Cole Williams</h1>
-        <nav>
-            <a href="#about">About</a> |
-            <a href="#software">Software</a> |
-            <a href="#publications">Publications</a> |
-            <a href="#unpublished">Unpublished work</a> |
-            <a href="#contact">Contact</a>
-        </nav>
+    <div class="page">
+        <header>
+            <a href="index.html" class="site-name">Cole Williams</a>
+            <nav>
+                <a href="#about">About</a>
+                <a href="#software">Software</a>
+                <a href="#publications">Publications</a>
+                <a href="#unpublished">Unpublished</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
 
-        <div id="about" class="about-section">
-            <img src="cole_williams_headshot.jpg" alt="Cole Williams" class="headshot">
-            <div class="about-content">
-                <h2>About Me</h2>
-                <p>I'm Cole Williams, a fifth year PhD candidate in Dr. Sohini Ramachandran's group at Brown University.</p>
-                <p>I am supported by an NSF Graduate Research Fellowship.</p>
-                <p>I recently defended my thesis titled <strong>Population-Genetic Methods and Insights Across the Spectrum of Relatedness</strong>.</p>
-                <div class="profile-links">
-                    <a href="https://scholar.google.com/citations?user=7HNgescAAAAJ&hl=en" class="contact-link">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-                        </svg>
-                        Google Scholar
-                    </a>
-                    <a href="https://github.com/williamscole" class="contact-link">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
-                        GitHub
-                    </a>
-                    <a href="ColeWilliams_CV.pdf" class="contact-link" target="_blank" rel="noopener noreferrer">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
-                        CV
-                    </a>
+        <section id="about">
+            <h2>About</h2>
+            <div class="about-grid">
+                <div class="headshot-placeholder">CW</div>
+                <div class="about-text">
+                    <div class="position-badge">
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+                        Postdoctoral Researcher · UCSF
+                    </div>
+                    <p>I'm Cole Williams, a postdoctoral researcher in <a href="https://zivlab.ucsf.edu" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-light)">Dr. Elad Ziv's lab</a> at UCSF.</p>
+                    <p>I recently completed my PhD in Dr. Sohini Ramachandran's group at Brown University, where I was supported by an NSF Graduate Research Fellowship. My thesis was titled <em>Population-Genetic Methods and Insights Across the Spectrum of Relatedness</em>.</p>
+                    <p>My work develops statistical and computational methods in population genetics, with a focus on identity-by-descent, relatedness inference, and genetic variation across diverse populations.</p>
+                    <div class="profile-links">
+                        <a href="https://scholar.google.com/citations?user=7HNgescAAAAJ&hl=en" class="profile-link" target="_blank">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                            Google Scholar
+                        </a>
+                        <a href="https://github.com/williamscole" class="profile-link" target="_blank">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            GitHub
+                        </a>
+                        <a href="ColeWilliams_CV.pdf" class="profile-link" target="_blank">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                            CV
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div id="software" class="section">
+        <section id="software">
             <h2>Software</h2>
-            <div class="software-item">
-                <img src="ponderosa-black_72ppi.png" alt="PONDEROSA Logo" class="software-logo">
-                <div class="software-content">
-                    <h3>PONDEROSA</h3>
-                    <p>PONDEROSA is a tool for genealogical relationship inference through identity-by-descent segments.</p>
-                    <a href="https://github.com/williamscole/PonderosaBeta" class="github-link" target="_blank" rel="noopener noreferrer">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
-                        View on GitHub
-                    </a>
+            <div class="software-list">
+                <div class="software-card">
+                    <img src="ponderosa-black_72ppi.png" alt="PONDEROSA" class="software-logo">
+                    <div>
+                        <h3>PONDEROSA</h3>
+                        <p>Genealogical relationship inference through identity-by-descent segments. Designed for large-scale datasets and endogamous populations.</p>
+                        <span class="tag">IBD · Relatedness · Pedigrees</span>
+                        <br><br>
+                        <a href="ponderosa.html" class="profile-link" style="margin-right:8px">Documentation</a>
+                        <a href="https://github.com/williamscole/PonderosaBeta" class="profile-link" target="_blank">GitHub</a>
+                    </div>
+                </div>
+                <div class="software-card">
+                    <img src="haptic.png" alt="HAPTIC" class="software-logo">
+                    <div>
+                        <h3>HAPTIC</h3>
+                        <p>A tool for inter-chromosomal haplotype phasing.</p>
+                        <span class="tag">Phasing · Haplotypes</span>
+                        <br><br>
+                        <a href="https://github.com/williamscole/HAPTIC" class="profile-link" target="_blank">GitHub</a>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="software-item">
-                <img src="haptic.png" alt="HAPTIC Logo" class="software-logo">
-                <div class="software-content">
-                    <h3>HAPTIC</h3>
-                    <p>HAPTIC is a tool for inter-chromosomal haplotype phasing.</p>
-                    <a href="https://github.com/williamscole/HAPTIC" class="github-link" target="_blank" rel="noopener noreferrer">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
-                        View on GitHub
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div id="publications" class="section">
+        <section id="publications">
             <h2>Publications</h2>
-            <div class="publications-list">
-                <div class="publication">
-                    <p><b>CM Williams</b>, J O'Connell, WA Freyman, 23andMe Research Team, CR Gignoux, S Ramachandran, AL Williams. (2024). "Phasing millions of samples achieves near perfect accuracy, enabling parent-of-origin classification of variants." <em>bioRxiv</em>, 2024.05.06.592816. In revision at <em>HGG Advances</em>.</p>
-                </div>
-                <div class="publication">
-                    <p><b>CM Williams</b>, BA Scelza, SD Slack, RA Mathias, H Watson, KC Barnes...S Ramachandran, BM Henn. (2024). "A rapid, accurate approach to inferring pedigrees in endogamous populations." <em>bioRxiv</em>, 2020.02.25.965376. Accepted at <em>GENETICS.</em></p>
-                </div>
-                <div class="publication">
-                    <p>V Ramanan*, R Vinod*, <b>C Williams*</b>, S Ramachandran, S Venkatasubramanian. (2025). "Genetic Data Governance in Crisis: Policy Recommendations for Safeguarding Privacy and Preventing Discrimination". <em>arXiv</em>, arXiv:2502.09716. *Denotes equal contribution.</p>
-                </div>
-                <div class="publication">
-                    <p>N Moody, <b>CM Williams</b>, S Ramachandran, M Fuxjager. (2025). "Social mates dynamically coordinate aggressive behavior to produce strategic territorial defense". <em>PLOS Computational Biology.</em></p>
-                </div>
-                <div class="publication">
-                    <p>NA Swinford, SP Prall, S Gopalan, <b>CM Williams</b>, J Sheehama, BA Scelza. (2023). "Increased homozygosity due to endogamy results in fitness consequences in a human population." <em>Proceedings of the National Academy of Sciences</em>, 120(43), e2309552120.</p>
-                </div>
-                <div class="publication">
-                    <p>LK Wiley, JA Shortt, ER Roberts, J Lowery, E Kudron, M Lin, D Mayer...<b>CM Williams</b> et al. (2022). "Building a vertically integrated genomic learning health system: The biobank at the Colorado Center for Personalized Medicine." <em>The American Journal of Human Genetics</em>, 111(1), 11-23.</p>
-                </div>
-                <div class="publication">
-                    <p>S Gopalan, REW Berl, JW Myrick, ZH Garfield, AW Reynolds, BK Bafens...<b>CM Williams</b> et al. (2022). "Hunter-gatherer genomes reveal diverse demographic trajectories during the rise of farming in Eastern Africa." <em>Current Biology</em>, 32(8), 1852-1860.e5.</p>
-                </div>
-            </div>
-        </div>
+            <div class="pub-list">
 
-        <div id="unpublished" class="section">
-            <h2>Unpublished work</h2>
-            <div class="software-item">
-                <div class="software-content">
-                    <h3>Genetic variation visualization with PCA</h3>
-                    <p>An interactive tutorial exploring PCA to visualize genetic variation. Send me an email if you want the data and I will happily share it :)</p>
-                    <div class="gif-container">
-                        <img src="pca.gif" alt="PCA" class="demo-gif">
-                        <div class="gif-caption">
-                            Separation of 1000 Genomes Project samples on PC1 (y-axis) as the number of markers considered (x-axis) increases.
-                        </div>
-                    </div>
-                    <div class="resource-links">
-                        <a href="https://colab.research.google.com/drive/1-QuJZ-KENsxprN6wTsbUbxBti1vrN4Wr?usp=sharing" class="resource-link colab-link" target="_blank" rel="noopener noreferrer">
-                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                            </svg>
-                            Take a look on Google colab!
-                        </a>
-                    </div>
+                <div class="pub">
+                    <span class="title">"Phasing millions of samples achieves near perfect accuracy, enabling parent-of-origin classification of variants."</span>
+                    <span class="pub-status">In revision</span><br>
+                    <span class="authors"><span class="my-name">CM Williams</span>, J O'Connell, WA Freyman, 23andMe Research Team, CR Gignoux, S Ramachandran, AL Williams.</span>
+                    <span class="venue">bioRxiv</span>, 2024.05.06.592816. In revision at <span class="venue">HGG Advances</span>. (2024)
                 </div>
+
+                <div class="pub">
+                    <span class="title">"A rapid, accurate approach to inferring pedigrees in endogamous populations."</span>
+                    <span class="pub-status">Accepted</span><br>
+                    <span class="authors"><span class="my-name">CM Williams</span>, BA Scelza, SD Slack, RA Mathias, H Watson, KC Barnes...S Ramachandran, BM Henn.</span>
+                    <span class="venue">bioRxiv</span>, 2020.02.25.965376. Accepted at <span class="venue">GENETICS</span>. (2024)
+                </div>
+
+                <div class="pub">
+                    <span class="title">"Genetic Data Governance in Crisis: Policy Recommendations for Safeguarding Privacy and Preventing Discrimination."</span><br>
+                    <span class="authors">V Ramanan*, R Vinod*, <span class="my-name">C Williams*</span>, S Ramachandran, S Venkatasubramanian. *Equal contribution.</span>
+                    <span class="venue">arXiv</span>, arXiv:2502.09716. (2025)
+                </div>
+
+                <div class="pub">
+                    <span class="title">"Social mates dynamically coordinate aggressive behavior to produce strategic territorial defense."</span><br>
+                    <span class="authors">N Moody, <span class="my-name">CM Williams</span>, S Ramachandran, M Fuxjager.</span>
+                    <span class="venue">PLOS Computational Biology</span>. (2025)
+                </div>
+
+                <div class="pub">
+                    <span class="title">"Increased homozygosity due to endogamy results in fitness consequences in a human population."</span><br>
+                    <span class="authors">NA Swinford, SP Prall, S Gopalan, <span class="my-name">CM Williams</span>, J Sheehama, BA Scelza.</span>
+                    <span class="venue">PNAS</span>, 120(43), e2309552120. (2023)
+                </div>
+
+                <div class="pub">
+                    <span class="title">"Building a vertically integrated genomic learning health system: The biobank at the Colorado Center for Personalized Medicine."</span><br>
+                    <span class="authors">LK Wiley, JA Shortt, ER Roberts....<span class="my-name">CM Williams</span> et al.</span>
+                    <span class="venue">The American Journal of Human Genetics</span>, 111(1), 11–23. (2022)
+                </div>
+
+                <div class="pub">
+                    <span class="title">"Hunter-gatherer genomes reveal diverse demographic trajectories during the rise of farming in Eastern Africa."</span><br>
+                    <span class="authors">S Gopalan, REW Berl, JW Myrick...<span class="my-name">CM Williams</span> et al.</span>
+                    <span class="venue">Current Biology</span>, 32(8), 1852–1860. (2022)
+                </div>
+
+            </div>
+        </section>
+
+        <section id="unpublished">
+            <h2>Unpublished Work</h2>
+
+            <div class="unp-card">
+                <h3>Genetic variation visualization with PCA</h3>
+                <p>An interactive tutorial exploring PCA to visualize genetic variation across the 1000 Genomes Project. Data available on request.</p>
+                <div class="gif-wrap">
+                    <img src="pca.gif" alt="PCA demo">
+                    <div class="gif-caption">Separation of 1000 Genomes Project samples on PC1 as the number of markers increases.</div>
+                </div>
+                <a href="https://colab.research.google.com/drive/1-QuJZ-KENsxprN6wTsbUbxBti1vrN4Wr?usp=sharing" class="profile-link" target="_blank">Open in Google Colab</a>
             </div>
 
-            <div class="software-item">
-                <div class="software-content">
-                    <h3>PoNNderosa</h3>
-                    <p>A new version of PONDEROSA for unphased data that uses convolutional neural networks (CNN) to learn IBD sharing patterns.</p>
-                    <div class="resource-links">
-                        <a href="https://github.com/williamscole/PoNNderosa" class="resource-link github-link" target="_blank" rel="noopener noreferrer">
-                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                            </svg>
-                            Coming soon
-                        </a>
-                    </div>
-                </div>
+            <div class="unp-card">
+                <h3>PoNNderosa <span style="font-size:0.75rem;color:var(--muted);font-family:var(--sans);font-weight:400">coming soon</span></h3>
+                <p>A new version of PONDEROSA for unphased data using convolutional neural networks (CNN) to learn IBD sharing patterns.</p>
             </div>
-        </div>
 
-        <div id="contact" class="section">
+        </section>
+
+        <section id="contact">
             <h2>Contact</h2>
-            <div class="contact-links">
-                <a href="mailto:cole.w@me.com" class="contact-link">
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    cole.w@me.com
-                </a>
-            </div>
-        </div>
-    </div>
+            <a href="mailto:cole.w@me.com" class="contact-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                cole.w@me.com
+            </a>
+        </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Cole Williams</p>
-        </div>
-    </footer>
+        <footer>
+            <p>&copy; 2025 Cole Williams &mdash; UCSF</p>
+        </footer>
+    </div>
 </body>
 </html>

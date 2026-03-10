@@ -3,114 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PONDEROSA Pedigree Simulator Documentation</title>
+    <title>PONDEROSA Simulator Documentation — Cole Williams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --ink: #1a1a2e;
+            --muted: #6b7280;
+            --accent: #2d6a4f;
+            --accent-light: #d8f3dc;
+            --bg: #fafaf8;
+            --border: #e5e7eb;
+            --serif: 'Lora', Georgia, serif;
+            --sans: 'DM Sans', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--ink);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .page {
+            max-width: 760px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 24px;
         }
-        h1, h2, h3 {
-            color: #2c3e50;
+
+        header {
+            padding: 36px 0 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 52px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
         }
+
+        .site-name {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink);
+            text-decoration: none;
+        }
+
+        nav { display: flex; gap: 24px; flex-wrap: wrap; }
+        nav a {
+            font-size: 0.875rem;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--ink); }
+
+        .page-title {
+            font-family: var(--serif);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+        }
+
+        .page-subtitle {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 48px;
+        }
+
+        .toc {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 48px;
+        }
+
+        .toc h3 {
+            font-family: var(--serif);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 12px;
+        }
+
+        .toc ol {
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .toc a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: opacity 0.2s;
+        }
+        .toc a:hover { opacity: 0.7; }
+
+        section {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(12px);
+            animation: fadeUp 0.4s ease forwards;
+        }
+
+        section:nth-child(n) { animation-delay: calc(0.05s * var(--i, 1)); }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin-top: 28px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 0.925rem;
+            color: #374151;
+            margin-bottom: 14px;
+        }
+
+        ul, ol {
+            padding-left: 22px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            font-size: 0.925rem;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        li strong { color: var(--ink); }
+
         code {
-            background-color: #f4f4f4;
-            padding: 2px 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.83rem;
+            background: #f1f1ee;
+            padding: 2px 6px;
             border-radius: 4px;
+            color: var(--accent);
+            border: 1px solid #e2e2de;
         }
+
         pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 4px;
+            background: #f1f1ee;
+            border: 1px solid #e2e2de;
+            border-radius: 8px;
+            padding: 16px 18px;
             overflow-x: auto;
+            margin: 16px 0;
         }
+
+        pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--ink);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
         .note {
-            background-color: #e7f3fe;
-            border-left: 6px solid #2196F3;
-            margin-bottom: 15px;
-            padding: 4px 12px;
+            background: var(--accent-light);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 6px 6px 0;
+            padding: 12px 16px;
+            margin: 16px 0;
+            font-size: 0.875rem;
+            color: #1a3c2a;
+        }
+
+        .arg-block {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+
+        .arg-row {
+            display: grid;
+            grid-template-columns: 210px 1fr;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .arg-row:last-child { border-bottom: none; }
+
+        .arg-name {
+            padding: 10px 14px;
+            background: #f9f9f7;
+            border-right: 1px solid var(--border);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .arg-desc {
+            padding: 10px 14px;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+
+        .rel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .rel-tag {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            color: var(--ink);
+            text-align: center;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 0 40px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 560px) {
+            .arg-row { grid-template-columns: 1fr; }
+            .arg-name { border-right: none; border-bottom: 1px solid var(--border); }
         }
     </style>
 </head>
 <body>
-    <h1>PONDEROSA Pedigree Simulator</h1>
-    
-    <h2>Overview</h2>
-    <p>The PONDEROSA Pedigree Simulator is a tool designed to generate training data for PONDEROSA.</p>
+    <div class="page">
+        <header>
+            <a href="index.html" class="site-name">Cole Williams</a>
+            <nav>
+                <a href="index.html#about">About</a>
+                <a href="index.html#software">Software</a>
+                <a href="ponderosa.html">PONDEROSA docs</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+        </header>
 
-    <h2>Installation</h2>
-    <p>The PONDEROSA Pedigree Simulator uses a modified version of Ped-Sim, that gives the Simulator pipeline more control over the input founder individuals.</p>
-    <pre><code>git clone https://github.com/williamscole/ped-sim.git
+        <div class="page-title">PONDEROSA Simulator</div>
+        <p class="page-subtitle">Generates synthetic pedigree data for training and testing PONDEROSA.</p>
+
+        <div class="toc">
+            <h3>Contents</h3>
+            <ol>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#usage">Usage &amp; Options</a></li>
+                <li><a href="#output">Output Files</a></li>
+                <li><a href="#relationships">Simulated Relationships</a></li>
+                <li><a href="#integration">Integration with PONDEROSA</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+            </ol>
+        </div>
+
+        <section id="installation">
+            <h2>1. Installation</h2>
+            <p>The simulator uses a modified version of Ped-Sim that gives the pipeline more control over founder individuals.</p>
+            <pre><code>git clone https://github.com/williamscole/ped-sim.git
 cd ped-sim
 make
 ./setup.sh</code></pre>
-    <p>Ensure you have Python 3.8 or later installed on your system.</p>
+            <p>Python 3.8 or later is required.</p>
+        </section>
 
-    <h2>Usage</h2>
-    <h3>Basic Command</h3>
-    <pre><code>python ponderosa_simulator.py [options]</code></pre>
+        <section id="usage">
+            <h2>2. Usage &amp; Options</h2>
+            <pre><code>python ponderosa_simulator.py [options]</code></pre>
 
-    <h3>Options</h3>
-    <ul>
-        <li><code>--num_generations</code>: Number of generations to simulate (default: 3)</li>
-        <li><code>--family_size</code>: Average number of children per family (default: 2)</li>
-        <li><code>--population_size</code>: Total number of individuals to simulate (default: 100)</li>
-        <li><code>--output_prefix</code>: Prefix for output files (default: "simulated_pedigree")</li>
-        <li><code>--snp_count</code>: Number of SNPs to simulate (default: 10000)</li>
-        <li><code>--mutation_rate</code>: Mutation rate per generation (default: 1e-8)</li>
-        <li><code>--recombination_rate</code>: Recombination rate (default: 1e-8)</li>
-        <li><code>--seed</code>: Random seed for reproducibility (default: None)</li>
-    </ul>
+            <div class="arg-block">
+                <div class="arg-row">
+                    <div class="arg-name">--num_generations</div>
+                    <div class="arg-desc">Number of generations to simulate. Default: <code>3</code></div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--family_size</div>
+                    <div class="arg-desc">Average number of children per family. Default: <code>2</code></div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--population_size</div>
+                    <div class="arg-desc">Total number of individuals. Default: <code>100</code></div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--output_prefix</div>
+                    <div class="arg-desc">Prefix for all output files. Default: <code>simulated_pedigree</code></div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--snp_count</div>
+                    <div class="arg-desc">Number of SNPs to simulate. Default: <code>10000</code></div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--mutation_rate</div>
+                    <div class="arg-desc">Mutation rate per generation. Default: <code>1e-8</code></div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--recombination_rate</div>
+                    <div class="arg-desc">Recombination rate. Default: <code>1e-8</code></div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--seed</div>
+                    <div class="arg-desc">Random seed for reproducibility. Default: <code>None</code></div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">--config</div>
+                    <div class="arg-desc">Path to a YAML config file for advanced parameter customization.</div>
+                </div>
+            </div>
 
-    <h3>Example</h3>
-    <pre><code>python ponderosa_simulator.py --num_generations 4 --family_size 3 --population_size 200 --output_prefix my_simulation --snp_count 20000</code></pre>
+            <h3>Example</h3>
+            <pre><code>python ponderosa_simulator.py \
+  --num_generations 4 \
+  --family_size 3 \
+  --population_size 200 \
+  --output_prefix my_simulation \
+  --snp_count 20000</code></pre>
+        </section>
 
-    <h2>Output Files</h2>
-    <p>The simulator generates the following files:</p>
-    <ul>
-        <li><code>[output_prefix].ped</code>: PLINK-formatted pedigree file</li>
-        <li><code>[output_prefix].map</code>: PLINK-formatted map file</li>
-        <li><code>[output_prefix].vcf</code>: VCF file containing simulated genotypes</li>
-        <li><code>[output_prefix]_relationships.txt</code>: True relationships between individuals</li>
-    </ul>
+        <section id="output">
+            <h2>3. Output Files</h2>
+            <div class="arg-block">
+                <div class="arg-row">
+                    <div class="arg-name">[prefix].ped</div>
+                    <div class="arg-desc">PLINK-formatted pedigree file.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">[prefix].map</div>
+                    <div class="arg-desc">PLINK-formatted map file.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">[prefix].vcf</div>
+                    <div class="arg-desc">VCF file containing simulated genotypes.</div>
+                </div>
+                <div class="arg-row">
+                    <div class="arg-name">[prefix]_relationships.txt</div>
+                    <div class="arg-desc">Ground-truth relationships between all pairs of individuals.</div>
+                </div>
+            </div>
+        </section>
 
-    <h2>Simulated Relationships</h2>
-    <p>The simulator can generate various relationship types, including:</p>
-    <ul>
-        <li>Parent-Child</li>
-        <li>Full Siblings</li>
-        <li>Half Siblings</li>
-        <li>Grandparent-Grandchild</li>
-        <li>Avuncular (Aunt/Uncle-Niece/Nephew)</li>
-        <li>First Cousins</li>
-    </ul>
+        <section id="relationships">
+            <h2>4. Simulated Relationships</h2>
+            <div class="rel-grid">
+                <div class="rel-tag">Parent–Child</div>
+                <div class="rel-tag">Full Siblings</div>
+                <div class="rel-tag">Half Siblings</div>
+                <div class="rel-tag">Grandparent–Grandchild</div>
+                <div class="rel-tag">Avuncular</div>
+                <div class="rel-tag">First Cousins</div>
+            </div>
+        </section>
 
-    <h2>Customizing Simulations</h2>
-    <p>Advanced users can modify the simulation parameters by editing the configuration file:</p>
-    <pre><code>python ponderosa_simulator.py --config custom_config.yaml</code></pre>
+        <section id="integration">
+            <h2>5. Integration with PONDEROSA</h2>
+            <p>Simulator output files are compatible with PONDEROSA input formats. Use them to benchmark performance on known pedigree structures or to generate training data for the classifiers.</p>
+            <p>See the <a href="ponderosa.html" style="color:var(--accent)">PONDEROSA documentation</a> for details on running the full pipeline.</p>
+            <div class="note">
+                The simulator is designed for testing and demonstration purposes. While it produces realistic genetic patterns, it may not capture all complexities of real-world inheritance.
+            </div>
+        </section>
 
-    <div class="note">
-        <p><strong>Note:</strong> The simulator is designed for testing and demonstration purposes. While it aims to create realistic genetic patterns, it may not capture all the complexities of real-world genetic inheritance.</p>
+        <section id="troubleshooting">
+            <h2>6. Troubleshooting</h2>
+            <ul>
+                <li><strong>Memory issues:</strong> For large simulations, reduce population size or SNP count, or run on an HPC environment.</li>
+                <li><strong>Runtime:</strong> Simulations with many generations or large populations can be slow. Consider submitting as an HPC batch job.</li>
+                <li><strong>File formats:</strong> Ensure PONDEROSA is configured to read the simulator's output formats before running.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Cole Williams &mdash; <a href="index.html">Home</a> &middot; <a href="ponderosa.html">PONDEROSA docs</a></p>
+        </footer>
     </div>
-
-    <h2>Integration with PONDEROSA</h2>
-    <p>The output files from the PONDEROSA Pedigree Simulator are compatible with PONDEROSA input formats. You can use the simulated data to test PONDEROSA's performance or to demonstrate its capabilities on known pedigree structures.</p>
-
-    <h2>Troubleshooting</h2>
-    <ul>
-        <li><strong>Memory Issues:</strong> For large simulations, increase available memory or reduce the population size and SNP count.</li>
-        <li><strong>Runtime:</strong> Simulations with many generations or large population sizes may take considerable time. Consider running them on a high-performance computing environment.</li>
-        <li><strong>File Formats:</strong> Ensure that PONDEROSA is correctly configured to read the simulator's output formats.</li>
-    </ul>
-
-    <h2>Contributing</h2>
-    <p>We welcome contributions to improve the PONDEROSA Pedigree Simulator. Please submit issues and pull requests to our GitHub repository: [GitHub Repository Link]</p>
-
-    <footer>
-        <p>For more information on PONDEROSA, visit the <a href="ponderosa.html">main PONDEROSA documentation</a>.</p>
-    </footer>
 </body>
 </html>
